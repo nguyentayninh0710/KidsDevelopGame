@@ -104,6 +104,7 @@ def update():
 
     if player.colliderect(meteor):
         lives -= 1
+        player.pos = (120, HEIGHT // 2)
         meteor.pos = (WIDTH + 100, random.randint(80, 460))
 
         try:
@@ -113,6 +114,7 @@ def update():
 
         if lives <= 0:
             game_over = True
+
 
 def move_player():
     speed = 5
