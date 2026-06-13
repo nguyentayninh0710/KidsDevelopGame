@@ -23,6 +23,7 @@ crystal.pos = (random.randint(250, 900), random.randint(80, 460))
 meteor = Actor("meteor")
 meteor.pos = (WIDTH + 100, random.randint(80, 460))
 
+
 def draw_volume_control():
     # Minus button (-)
     screen.draw.filled_rect(Rect((330, 20), (40, 45)), "#001B5E")
@@ -51,6 +52,7 @@ def draw_volume_control():
         color="white"
     )
 
+
 def draw():
     screen.clear()
     screen.blit("background", (0, 0))
@@ -67,6 +69,7 @@ def draw():
         meteor.draw()
         draw_ui()
 
+
 def draw_start_screen():
     screen.draw.text(
         "NEON SPACE DASH",
@@ -80,7 +83,9 @@ def draw_start_screen():
         fontsize=36,
         color="white"
     )
+
     player.draw()
+
 
 def draw_ui():
     screen.draw.filled_rect(Rect((20, 20), (180, 45)), "#001B5E")
@@ -100,7 +105,6 @@ def draw_ui():
         fontsize=30,
         color="white"
     )
-
 
 
 def draw_game_over():
@@ -123,7 +127,9 @@ def draw_game_over():
         color="cyan"
     )
 
+
 bgm_started = False
+
 
 def update():
     global score, lives, game_over, bgm_started
@@ -131,7 +137,7 @@ def update():
     if not bgm_started:
         bgm_started = True
         try:
-            pygame.mixer.music.load('music/bgm.wav')
+            pygame.mixer.music.load("music/bgm.wav")
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(music_volume)
         except Exception as e:
@@ -143,15 +149,22 @@ def update():
     move_player()
     move_meteor()
 
+    # =====================================================
+    # TODO 3: Increase score when player collects crystal
+    # Goal:
+    # - If player touches crystal, score increases by 1
+    # - Move crystal to a new random position
+    # =====================================================
     if player.colliderect(crystal):
-        score += 1
-        crystal.pos = (random.randint(250, 900), random.randint(80, 460))
+        # score += ___
+        # crystal.pos = (random.randint(___, ___), random.randint(___, ___))
 
         try:
             sounds.collect.play()
         except:
             pass
 
+    # This part is already completed for demo purpose
     if player.colliderect(meteor):
         lives -= 1
         player.pos = (120, HEIGHT // 2)
@@ -171,25 +184,58 @@ def update():
                 pass
 
 
-
 def move_player():
     speed = 5
 
+    # =====================================================
+    # TODO 1: Make the player move with arrow keys
+    # Goal:
+    # - Left arrow: move player to the left
+    # - Right arrow: move player to the right
+    # - Up arrow: move player upward
+    # - Down arrow: move player downward
+    # Hint:
+    # - player.x changes horizontal position
+    # - player.y changes vertical position
+    # =====================================================
+
     if keyboard.left and player.x > 40:
-        player.x -= speed
+        # player.x -= ___
+        pass
+
     if keyboard.right and player.x < WIDTH - 40:
-        player.x += speed
+        # player.x += ___
+        pass
+
     if keyboard.up and player.y > 50:
-        player.y -= speed
+        # player.y -= ___
+        pass
+
     if keyboard.down and player.y < HEIGHT - 50:
-        player.y += speed
+        # player.y += ___
+        pass
+
 
 def move_meteor():
-    meteor.x -= 5
+    # =====================================================
+    # TODO 2: Make the meteor move from right to left
+    # Goal:
+    # - Meteor moves to the left every frame
+    # - When it goes out of the screen, reset it to the right
+    # - Give it a new random y position
+    # Hint:
+    # - meteor.x controls horizontal position
+    # - meteor.y controls vertical position
+    # =====================================================
 
-    if meteor.x < -80:
-        meteor.x = WIDTH + 100
-        meteor.y = random.randint(80, 460)
+    # meteor.x -= ___
+
+    # if meteor.x < ___:
+    #     meteor.x = ___
+    #     meteor.y = random.randint(___, ___)
+
+    pass
+
 
 def on_key_down(key):
     global game_started, game_over, score, lives, music_volume
@@ -201,11 +247,13 @@ def on_key_down(key):
         score = 0
         lives = 3
         game_over = False
+
         player.pos = (120, HEIGHT // 2)
         meteor.pos = (WIDTH + 100, random.randint(80, 460))
-        crystal.pos = (random.randint(250, 900), random.randint(80, 460)) 
+        crystal.pos = (random.randint(250, 900), random.randint(80, 460))
+
         try:
-            pygame.mixer.music.load('music/bgm.wav')
+            pygame.mixer.music.load("music/bgm.wav")
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(music_volume)
         except:
@@ -225,14 +273,17 @@ def on_key_down(key):
         except:
             pass
 
+
 def on_mouse_down(pos):
     global music_volume
+
     if Rect((330, 20), (40, 45)).collidepoint(pos):
         music_volume = max(0.0, music_volume - 0.1)
         try:
             pygame.mixer.music.set_volume(music_volume)
         except:
             pass
+
     elif Rect((590, 20), (40, 45)).collidepoint(pos):
         music_volume = min(1.0, music_volume + 0.1)
         try:
@@ -242,3 +293,26 @@ def on_mouse_down(pos):
 
 
 pgzrun.go()
+
+'''
+# TODO 1
+player.x -= speed
+player.x += speed
+player.y -= speed
+player.y += speed
+'''
+
+'''
+# TODO 2
+meteor.x -= 5
+
+if meteor.x < -80:
+    meteor.x = WIDTH + 100
+    meteor.y = random.randint(80, 460)
+'''
+
+'''
+# TODO 3
+score += 1
+crystal.pos = (random.randint(250, 900), random.randint(80, 460))
+'''
