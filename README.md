@@ -439,3 +439,10 @@ python demoGame.py
 * Run the game using `python demoGame.py`.
 * Keep all assets in the correct folders.
 * On GitHub Codespaces, configure a virtual display if you need to visually play the GUI game.
+
+
+INFO FOR IMAGES:
+* background.png : 960 x 540 px 
+* crystal.png : 52 x 52 px 
+* meteor.png : 88 x 64 px 
+* player.png : 72 x 72 px
