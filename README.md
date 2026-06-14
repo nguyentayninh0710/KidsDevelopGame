@@ -446,3 +446,10 @@ INFO FOR IMAGES:
 * crystal.png : 52 x 52 px 
 * meteor.png : 88 x 64 px 
 * player.png : 72 x 72 px
+
+
+UPDATE SIZE FOR IMAGE:
+<!-- player -->
+player._orig_surf = pygame.transform.scale(player._orig_surf, (72, 72))
+player._surf = pygame.transform.scale(player._surf, (72, 72))
+player._update_pos()
